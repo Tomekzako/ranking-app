@@ -1,12 +1,20 @@
 <template>
   <div class="ranking">
+    <TheButton variant="text" @click="goToPrevStep" class="ranking__prev">
+      <img
+        class="ranking__button--text-icon"
+        alt="Previous step icon"
+        src="@/assets/images/arrow-prev.svg"
+      />
+      Prev
+    </TheButton>
     <h1 class="ranking__title">
       {{ ranking.question }}
     </h1>
 
     <h2 class="ranking__subtitle">{{ ranking.subtitle }}</h2>
 
-    <div class="ranking__main">
+    <main class="ranking__main">
       <draggable
         class="ranking__box"
         :list="ranking.answers"
@@ -80,7 +88,8 @@
           Replay
         </TheButton>
       </div>
-    </div>
+    </main>
+    <TheButton @click="goToNextStep" class="ranking__next"> Next </TheButton>
   </div>
 </template>
 
@@ -136,6 +145,14 @@ function validateDrag(evt: any) {
     return emit('triggerNotification', 'Only three responses are allowed');
   }
 }
+
+function goToPrevStep() {
+  console.log('Go to previous step');
+}
+
+function goToNextStep() {
+  console.log('Go to next step');
+}
 </script>
 
 <style scoped>
@@ -147,6 +164,7 @@ function validateDrag(evt: any) {
   font-size: 1.1875rem;
   color: var(--c-text);
   line-height: 1.75rem;
+  margin-top: 1rem;
 }
 
 .ranking__subtitle {
@@ -228,6 +246,10 @@ function validateDrag(evt: any) {
   margin-top: 0.875rem;
 }
 
+.ranking__next {
+  margin-top: 1rem;
+}
+
 @media (min-width: 768px) {
   .ranking {
     margin-top: 3rem;
@@ -249,6 +271,10 @@ function validateDrag(evt: any) {
     font-size: 1.1875rem;
     line-height: 1.5rem;
     margin-right: 1rem;
+  }
+
+  .ranking__next {
+    margin-top: 2rem;
   }
 }
 </style>

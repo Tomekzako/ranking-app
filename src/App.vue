@@ -5,9 +5,7 @@
   <main>
     <div class="ranking__container">
       <TheRanking
-        v-for="ranking in rankingData"
-        :key="ranking.id"
-        :ranking="ranking"
+        :ranking="rankingData[step - 1]"
         @triggerNotification="triggerNotification"
       />
     </div>
@@ -43,6 +41,7 @@ const rankingData: Ranking[] = [
     allowedAnswers: 3,
   },
 ];
+const step = 1;
 
 const showNotification = ref(false);
 const notificationMessage = ref('Only three responses are allowed');

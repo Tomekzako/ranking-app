@@ -23,7 +23,7 @@ withDefaults(
 );
 </script>
 
-<style scoped>
+<style>
 .ranking__button {
   color: var(--c-white);
   padding: 0.5rem 1rem;
@@ -50,13 +50,15 @@ withDefaults(
   color: var(--c-text-light);
   border: 0;
   background-color: transparent;
+  padding: 0;
+  height: 1.5rem;
 }
 
 .ranking__button--text:hover {
   color: var(--c-text);
 }
 
-.ranking__button--text--icon {
+.ranking__button--text-icon {
   margin-right: 0.25rem;
 }
 </style>
