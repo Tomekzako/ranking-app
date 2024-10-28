@@ -27,11 +27,7 @@
           >
             {{ element.title }}
 
-            <img
-              alt="Arrow right"
-              class="answer__arrow"
-              src="@/assets/images/arrow.svg"
-            />
+            <img alt="Arrow right" src="@/assets/images/arrow.svg" />
           </div>
         </template>
       </draggable>
@@ -92,8 +88,8 @@
 import TheButton from '@/components/TheButton.vue';
 import draggable from 'vuedraggable';
 import { reactive } from 'vue';
-import type { Ranking } from '@/types/Ranking';
-import type { Answer } from '@/types/Answer';
+import type { Ranking } from '@/types/ranking';
+import type { Answer } from '@/types/answer';
 
 defineProps<{
   ranking: Ranking;
@@ -121,14 +117,13 @@ function selectAnswer(answer: Answer) {
 
 function removeSelected(id: number) {
   const selectedIndex = responses.findIndex((response) => response.id === id);
-  console.log(id);
 
   responses.splice(selectedIndex, 1);
 }
 
 function validateMove(evt: any) {
   const isAlreadySelected = responses.find(
-    (ans) => ans.id === evt.draggedContext.element.id
+    (answer) => answer.id === evt.draggedContext.element.id
   );
   if (isAlreadySelected) {
     emit('triggerNotification', 'This answer is already selected');
@@ -143,16 +138,15 @@ function validateDrag(evt: any) {
 }
 </script>
 
-<style>
+<style scoped>
 .ranking {
-  margin-top: 3rem;
+  margin-top: 1.5rem;
 }
 
 .ranking__title {
   font-size: 1.1875rem;
   color: var(--c-text);
   line-height: 1.75rem;
-  margin-top: 1rem;
 }
 
 .ranking__subtitle {
@@ -162,7 +156,7 @@ function validateDrag(evt: any) {
 }
 
 .ranking__main {
-  margin-top: 3rem;
+  margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
 }
@@ -185,22 +179,33 @@ function validateDrag(evt: any) {
 }
 
 .ranking__box--item {
-  padding: 1.25rem;
+  padding: 0.5rem;
   border-radius: 0.375rem;
   cursor: pointer;
   height: 4rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--c-text);
-  line-height: 1.5rem;
-  font-size: 1.1875rem;
+  line-height: 1.2rem;
+  font-size: 0.875rem;
 }
 
 .ranking__box--answer {
   background-color: var(--c-text-lightest);
   box-shadow: 0px 0px 0px 2px var(--c-text-lightest) inset;
+}
+
+.ranking__box--answer img {
+  transition: all 0.2s ease-in;
+}
+
+.ranking__box--answer:hover {
+  background-color: var(--c-text-lighter);
+}
+.ranking__box--answer:hover img {
+  transform: translateX(2px);
 }
 
 .ranking__box--selected {
@@ -211,15 +216,39 @@ function validateDrag(evt: any) {
 .ranking__box--number {
   position: absolute;
   right: 100%;
-  top: 1.25rem;
-  font-size: 1.1875rem;
-  line-height: 1.5rem;
+  top: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.2rem;
   color: var(--c-accent);
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 .ranking__reset {
   margin-left: auto;
   margin-top: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .ranking {
+    margin-top: 3rem;
+  }
+
+  .ranking__main {
+    margin-top: 3rem;
+  }
+
+  .ranking__box--item {
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.5rem;
+    font-size: 1.1875rem;
+  }
+
+  .ranking__box--number {
+    top: 1.25rem;
+    font-size: 1.1875rem;
+    line-height: 1.5rem;
+    margin-right: 1rem;
+  }
 }
 </style>

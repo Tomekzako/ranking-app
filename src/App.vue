@@ -10,9 +10,6 @@
         :ranking="ranking"
         @triggerNotification="triggerNotification"
       />
-      <TheButton variant="default" @click="nextStep" class="ranking__button">
-        Next
-      </TheButton>
     </div>
   </main>
   <transition name="notification">
@@ -20,25 +17,16 @@
       {{ notificationMessage }}
     </TheNotification>
   </transition>
-  <footer>
-    <div class="ranking__brand">
-      <img
-        alt="Centiment logo"
-        class="ranking__brand--logo"
-        src="@/assets/images/logo-dark.svg"
-      />
-      Powered by Centiment
-    </div>
-  </footer>
+  <TheFooter />
 </template>
 
 <script setup lang="ts">
 import TheNav from './components/TheNav.vue';
 import TheNotification from './components/TheNotification.vue';
 import TheRanking from './components/TheRanking.vue';
-import TheButton from './components/TheButton.vue';
+import TheFooter from './components/TheFooter.vue';
 import { ref } from 'vue';
-import type { Ranking } from './types/Ranking';
+import type { Ranking } from './types/ranking';
 
 const rankingData: Ranking[] = [
   {
@@ -64,30 +52,4 @@ function triggerNotification(message: string) {
   notificationMessage.value = message;
   setTimeout(() => (showNotification.value = false), 3000);
 }
-
-function nextStep() {
-  console.log('Save responses and move to next step');
-}
 </script>
-
-<style scoped>
-.ranking__button {
-  margin-top: 2rem;
-}
-.ranking__brand {
-  display: flex;
-  padding: 0.25rem 0.375rem;
-  border: 1px solid var(--c-text-lighter);
-  border-radius: 0.25rem;
-  position: fixed;
-  bottom: 0.5rem;
-  right: 0.5rem;
-  width: 9.6rem;
-  margin-left: auto;
-  font-size: 0.6875rem;
-}
-.ranking__brand--logo {
-  margin-right: 0.25rem;
-  line-height: 1rem;
-}
-</style>

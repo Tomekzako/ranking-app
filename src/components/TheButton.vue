@@ -23,7 +23,7 @@ withDefaults(
 );
 </script>
 
-<style>
+<style scoped>
 .ranking__button {
   color: var(--c-white);
   padding: 0.5rem 1rem;
